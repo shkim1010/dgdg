@@ -322,13 +322,13 @@
                     8: ["어묵떡새송이구이", "영양쌀밥", "추어탕(자율)", "찜닭(국)", "오이부추무침", "배추김치", "짜먹는요구르트"],
                     9: ["유부초밥", "돈코츠라멘(주식)", "찐만두", "궁채양파장아찌", "배추김치", "귤"],
                     10: ["귀리밥", "백김치미역냉국", "방풍나물무침(자율)", "주꾸미떡볶음", "닭튀김샐러드", "배추김치", "바나나"],
-                    11: ["현미밥", "육개장", "캬라멜견과볶음", "깻잎무침(자율)", "타코오믈렛", "김치볶음", "찐두부&햄", "토마토유자절임"],
+                    11: ["통밀쌀밥", "냉짬뽕국(면사리)", "건파래자반", "탕수육(하와이안)", "배추김치", "단무지무침", "수박"], // 금요일 급식 추가
                     12: ["주말", "급식 없음"], // 토요일 급식 예시 (없음을 명시)
                     13: ["주말", "급식 없음"], // 일요일 급식 예시 (없음을 명시)
                     14: ["참치비빔밥(포케)", "가쓰오맑은국", "알감자조림", "다시마채무침(자율)", "배추김치", "나쵸(치즈소스)", "망고바"],
                     15: ["오색현미밥", "들깨순두부국", "갈비맛돈육단호박조림", "야채쌈(자율)", "새우깐풍", "배추김치", "키위주스"],
                     16: ["닭야채볶음밥(치즈)", "미소된장국(미역유부)", "리코타치즈샐러드(발사믹)", "배추김치", "감자핫도그", "새송이고추장구이(자율)", "요구르트"],
-                    17: ["통밀쌀밥", "냉짬뽕국(면사리)", "건파래자반", "탕수육(하와이안)", "배추김치", "단무지무침", "수박"],
+                    17: ["현미밥", "육개장", "캬라멜견과볶음", "깻잎무침(자율)", "타코오믈렛", "김치볶음", "찐두부&햄", "토마토유자절임"], // 금요일 급식 추가
                     18: ["지정밥", "묵채국", "야채겉절이", "오리불고기", "감자그라탕", "열무김치", "아이스크림"],
                     19: ["주말", "급식 없음"], // 토요일 급식 예시 (없음을 명시)
                     20: ["주말", "급식 없음"] // 일요일 급식 예시 (없음을 명시)
@@ -468,28 +468,30 @@
             let diff = today.getDate() - currentDayOfWeek + (currentDayOfWeek === 0 ? -6 : 1); 
             const mondayOfWeek = new Date(today.setDate(diff));
 
+            const daysOfWeekDisplay = ["일", "월", "화", "수", "목", "금", "토"];
+
             let html = `
                 <h2 class="section-title">주간 급식표</h2>
                 <table class="meal-table">
                     <thead>
-                        <tr>
-                            <th colspan="2">월요일</th>
-                            <th colspan="2">화요일</th>
-                        </tr>
-                        <tr>
-                            <th colspan="2">수요일</th>
-                            <th colspan="2">목요일</th>
-                        </tr>
-                        <tr>
-                            <th colspan="2">금요일</th>
-                            <th colspan="2" class="weekend-header">주말</th>
-                        </tr>
-                    </thead>
-                    <tbody>`;
+                        <tr>`;
             
-            const daysData = []; // 월, 화, 수, 목, 금, 토, 일 7일치 데이터를 저장할 배열
-
-            for (let i = 0; i < 7; i++) { // 월요일(0)부터 일요일(6)까지 7일
+            // 요일 헤더
+            for (let i = 0; i < 7; i++) {
+                const currentDay = new Date(mondayOfWeek);
+                currentDay.setDate(mondayOfWeek.getDate() + i);
+                const dayIdx = currentDay.getDay(); // 0:일, 1:월, ..., 6:토
+                const dayName = daysOfWeekDisplay[dayIdx];
+                const headerClass = (dayIdx === 0 || dayIdx === 6) ? "weekend-header" : ""; // 주말 헤더 스타일
+                html += `<th class="${headerClass}">${dayName}</th>`;
+            }
+            html += `       </tr>
+                    </thead>
+                    <tbody>
+                        <tr>`;
+            
+            // 날짜 및 메뉴 셀
+            for (let i = 0; i < 7; i++) {
                 let displayDate = new Date(mondayOfWeek);
                 displayDate.setDate(mondayOfWeek.getDate() + i);
 
@@ -498,11 +500,14 @@
                 const mealDay = displayDate.getDate();
                 const mealKey = mealDay;
 
+                const dayIdx = displayDate.getDay();
+                const isWeekend = (dayIdx === 0 || dayIdx === 6); // 0:일, 6:토
+                const cellClass = isWeekend ? "weekend-cell" : "";
+
                 const mealsForDay = mealsData[mealYear] && mealsData[mealYear][mealMonth] ?
                                      mealsData[mealYear][mealMonth][mealKey] : null;
 
-                const dayName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"][displayDate.getDay()];
-                const formattedDate = `(${mealMonth}/${mealDay})`;
+                const formattedDate = `${mealMonth}/${mealDay}`;
 
                 let menuContent = `<span class="no-meal">급식 정보 없음</span>`;
                 if (mealsForDay && mealsForDay.length > 0 && !(mealsForDay.length === 2 && mealsForDay[0] === "주말" && mealsForDay[1] === "급식 없음")) {
@@ -511,46 +516,18 @@
                         menuContent += `<li>${menu}</li>`;
                     });
                     menuContent += `</ul>`;
-                } else if (dayName === "토요일" || dayName === "일요일") {
+                } else if (isWeekend) {
                     menuContent = `<span class="no-meal">주말은 급식이 제공되지 않습니다.</span>`;
                 }
 
-
-                daysData.push({
-                    day: dayName,
-                    date: formattedDate,
-                    menu: menuContent,
-                    isWeekend: (dayName === "토요일" || dayName === "일요일")
-                });
+                html += `<td class="meal-cell ${cellClass}">
+                            <div class="meal-date-number">${formattedDate}</div>
+                            <div class="meal-menu-content">${menuContent}</div>
+                        </td>`;
             }
 
-            // 월요일, 화요일 (daysData[1], daysData[2])
-            html += `<tr>
-                        <td class="meal-date-cell">${daysData[1].date}</td>
-                        <td class="meal-content-cell">${daysData[1].menu}</td>
-                        <td class="meal-date-cell">${daysData[2].date}</td>
-                        <td class="meal-content-cell">${daysData[2].menu}</td>
-                    </tr>`;
-
-            // 수요일, 목요일 (daysData[3], daysData[4])
-            html += `<tr>
-                        <td class="meal-date-cell">${daysData[3].date}</td>
-                        <td class="meal-content-cell">${daysData[3].menu}</td>
-                        <td class="meal-date-cell">${daysData[4].date}</td>
-                        <td class="meal-content-cell">${daysData[4].menu}</td>
-                    </tr>`;
-
-            // 금요일 (daysData[5])
-            html += `<tr>
-                        <td class="meal-date-cell">${daysData[5].date}</td>
-                        <td class="meal-content-cell">${daysData[5].menu}</td>
-                        <td class="meal-date-cell weekend-cell">${daysData[6].date} ~ ${daysData[0].date}</td>
-                        <td class="meal-content-cell weekend-cell">
-                            <span class="no-meal">주말은 급식이 제공되지 않습니다.</span>
-                        </td>
-                    </tr>`;
-
-            html += `   </tbody>
+            html += `       </tr>
+                    </tbody>
                 </table>`;
             mealScheduleContainer.innerHTML = html;
         }
