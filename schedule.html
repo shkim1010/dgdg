@@ -454,7 +454,7 @@
 
         renderCalendar(); // 페이지 로드 시 달력 초기 렌더링
 
-        // --- 주간 급식표 (새로운 레이아웃) ---
+        // --- 주간 급식표 (월-금만 표시) ---
         function renderWeeklyMeal() {
             mealScheduleContainer.innerHTML = ''; // 기존 급식표 삭제
 
@@ -468,7 +468,8 @@
             let diff = today.getDate() - currentDayOfWeek + (currentDayOfWeek === 0 ? -6 : 1); 
             const mondayOfWeek = new Date(today.setDate(diff));
 
-            const daysOfWeekDisplay = ["일", "월", "화", "수", "목", "금", "토"];
+            // 표시할 요일 (월-금)
+            const daysOfWeekDisplay = ["월", "화", "수", "목", "금"]; // 토요일, 일요일 제거
 
             let html = `
                 <h2 class="section-title">주간 급식표</h2>
@@ -476,22 +477,18 @@
                     <thead>
                         <tr>`;
             
-            // 요일 헤더
-            for (let i = 0; i < 7; i++) {
-                const currentDay = new Date(mondayOfWeek);
-                currentDay.setDate(mondayOfWeek.getDate() + i);
-                const dayIdx = currentDay.getDay(); // 0:일, 1:월, ..., 6:토
-                const dayName = daysOfWeekDisplay[dayIdx];
-                const headerClass = (dayIdx === 0 || dayIdx === 6) ? "weekend-header" : ""; // 주말 헤더 스타일
-                html += `<th class="${headerClass}">${dayName}</th>`;
-            }
+            // 요일 헤더 (월-금)
+            daysOfWeekDisplay.forEach(dayName => {
+                html += `<th>${dayName}</th>`;
+            });
             html += `       </tr>
                     </thead>
                     <tbody>
                         <tr>`;
             
-            // 날짜 및 메뉴 셀
-            for (let i = 0; i < 7; i++) {
+            // 날짜 및 메뉴 셀 (월-금)
+            // 월요일(i=0)부터 시작하여 금요일(i=4)까지 5일만 반복
+            for (let i = 0; i < 5; i++) { 
                 let displayDate = new Date(mondayOfWeek);
                 displayDate.setDate(mondayOfWeek.getDate() + i);
 
@@ -500,9 +497,10 @@
                 const mealDay = displayDate.getDate();
                 const mealKey = mealDay;
 
-                const dayIdx = displayDate.getDay();
-                const isWeekend = (dayIdx === 0 || dayIdx === 6); // 0:일, 6:토
-                const cellClass = isWeekend ? "weekend-cell" : "";
+                // 이제 주말(weekend-cell) 클래스는 필요 없습니다.
+                // const dayIdx = displayDate.getDay();
+                // const isWeekend = (dayIdx === 0 || dayIdx === 6); // 0:일, 6:토
+                // const cellClass = isWeekend ? "weekend-cell" : "";
 
                 const mealsForDay = mealsData[mealYear] && mealsData[mealYear][mealMonth] ?
                                      mealsData[mealYear][mealMonth][mealKey] : null;
@@ -516,11 +514,13 @@
                         menuContent += `<li>${menu}</li>`;
                     });
                     menuContent += `</ul>`;
-                } else if (isWeekend) {
-                    menuContent = `<span class="no-meal">주말은 급식이 제공되지 않습니다.</span>`;
-                }
+                } 
+                // 이제 주말이 아니므로 "주말은 급식이 제공되지 않습니다." 메시지는 필요 없음
+                // else if (isWeekend) {
+                //     menuContent = `<span class="no-meal">주말은 급식이 제공되지 않습니다.</span>`;
+                // }
 
-                html += `<td class="meal-cell ${cellClass}">
+                html += `<td class="meal-cell">
                             <div class="meal-date-number">${formattedDate}</div>
                             <div class="meal-menu-content">${menuContent}</div>
                         </td>`;
