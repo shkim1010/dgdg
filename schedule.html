@@ -476,12 +476,13 @@
                 let displayDate = new Date(mondayOfWeek);
                 displayDate.setDate(mondayOfWeek.getDate() + i);
 
+                const mealYear = displayDate.getFullYear();
                 const mealMonth = displayDate.getMonth() + 1;
                 const mealDay = displayDate.getDate();
                 const mealKey = mealDay; // 급식 데이터 키는 일만 사용
 
-                const mealsForDay = mealsData[displayDate.getFullYear()] && mealsData[displayDate.getFullYear()][mealMonth] ?
-                                    mealsData[displayDate.getFullYear()][mealMonth][mealKey] : null;
+                const mealsForDay = mealsData[mealYear] && mealsData[mealYear][mealMonth] ?
+                                    mealsData[mealYear][mealMonth][mealKey] : null;
 
                 html += `<tr>
                             <td>${daysToDisplay[i]}</td>
