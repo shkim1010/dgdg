@@ -242,6 +242,91 @@
             // 다른 반의 수행평가도 여기에 추가
         };
 
+        const academicScheduleData = {
+            2025: {
+                // 1월 ~ 5월은 데이터가 없으므로 비워둡니다.
+                1: [], 2: [], 3: [], 4: [], 5: [],
+                6: [
+                    { date: 3, event: "대통령 선거" },
+                    { date: 4, event: "대수능 모의평가/전국연합학력평가" },
+                    { date: 5, event: "개교기념일" },
+                    { date: 6, event: "현충일" }
+                ],
+                7: [
+                    { date: 1, event: "지필평가" }, { date: 2, event: "지필평가" }, { date: 3, event: "지필평가" }, { date: 4, event: "지필평가" },
+                    { date: 7, event: "수업량유연화주간, 꿈끼탐색주간" },
+                    { date: 8, event: "수업량유연화주간, 꿈끼탐색주간" },
+                    { date: 9, event: "수업량유연화주간, 꿈끼탐색주간" },
+                    { date: 10, event: "전국연합학력평가 (3학년)/행복어울림과정" },
+                    { date: 14, event: "학생회 선거 정책 토론" },
+                    { date: 15, event: "학생회 선거" },
+                    { date: 18, event: "여름방학식" }
+                ],
+                8: [
+                    { date: 13, event: "개학일" },
+                    { date: 15, event: "광복절/오민영 생일" },
+                    { date: 29, event: "리더십캠프" }, { date: 30, event: "리더십캠프" }
+                ],
+                9: [
+                    { date: 3, event: "대수능 모의평가(3학년)/전국연합학력평가(1,2학년)" },
+                    { date: 26, event: "지필평가" },
+                    { date: 29, event: "지필평가" }, { date: 30, event: "지필평가" }
+                ],
+                10: [
+                    { date: 1, event: "지필평가" },
+                    { date: 3, event: "개천절" },
+                    { date: 5, event: "추석연휴" }, { date: 6, event: "추석연휴" }, { date: 7, event: "추석연휴" },
+                    { date: 8, event: "대체공휴일" },
+                    { date: 9, event: "한글날" },
+                    { date: 10, event: "재량휴업일" },
+                    { date: 14, event: "전국연합학력평가" }
+                ],
+                11: [
+                    { date: 12, event: "대학수학능력시험 예비소집일" },
+                    { date: 13, event: "재량휴업일" }
+                ],
+                12: [
+                    { date: 11, event: "지필평가" }, { date: 12, event: "지필평가" },
+                    { date: 15, event: "지필평가" }, { date: 16, event: "지필평가" },
+                    { date: 24, event: "졸업/진급사정회" },
+                    { date: 25, event: "성탄절" },
+                    { date: 29, event: "백합의 향 축제" }, { date: 30, event: "백합의 향 축제" },
+                    { date: 31, event: "겨울방학식" }
+                ]
+            },
+            2026: {
+                1: [
+                    { date: 1, event: "신정" }
+                ],
+                2: [
+                    { date: 2, event: "개학식" },
+                    { date: 5, event: "졸업식" },
+                    { date: 6, event: "종업식" },
+                    { date: 9, event: "봄방학 시작" }
+                ]
+            }
+        };
+
+        const mealsData = {
+            2025: {
+                // 1월 ~ 6월은 데이터가 없으므로 비워둡니다.
+                1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {},
+                7: {
+                    7: ["열무비빔밥", "콩국(자율)", "북어미역국", "배추김치", "치아바타치즈샌드위치", "복숭아음료"],
+                    8: ["어묵떡새송이구이", "영양쌀밥", "추어탕(자율)", "찜닭(국)", "오이부추무침", "배추김치", "짜먹는요구르트"],
+                    9: ["유부초밥", "돈코츠라멘(주식)", "찐만두", "궁채양파장아찌", "배추김치", "귤"],
+                    10: ["귀리밥", "백김치미역냉국", "방풍나물무침(자율)", "주꾸미떡볶음", "닭튀김샐러드", "배추김치", "바나나"],
+                    11: ["현미밥", "육개장", "캬라멜견과볶음", "깻잎무침(자율)", "타코오믈렛", "김치볶음", "찐두부&햄", "토마토유자절임"],
+                    14: ["참치비빔밥(포케)", "가쓰오맑은국", "알감자조림", "다시마채무침(자율)", "배추김치", "나쵸(치즈소스)", "망고바"],
+                    15: ["오색현미밥", "들깨순두부국", "갈비맛돈육단호박조림", "야채쌈(자율)", "새우깐풍", "배추김치", "키위주스"],
+                    16: ["닭야채볶음밥(치즈)", "미소된장국(미역유부)", "리코타치즈샐러드(발사믹)", "배추김치", "감자핫도그", "새송이고추장구이(자율)", "요구르트"],
+                    17: ["통밀쌀밥", "냉짬뽕국(면사리)", "건파래자반", "탕수육(하와이안)", "배추김치", "단무지무침", "수박"],
+                    18: ["지정밥", "묵채국", "야채겉절이", "오리불고기", "감자그라탕", "열무김치", "아이스크림"]
+                }
+            }
+        };
+
+
         const scheduleContainer = document.getElementById("schedule");
         const academicScheduleContainer = document.getElementById("academic-schedule");
         const mealScheduleContainer = document.getElementById("meal-schedule");
@@ -249,7 +334,7 @@
         // --- 시간표 및 수행평가 출력 (기존 로직 유지) ---
         if (timetable[selectedClass]) {
             const days = ["월요일", "화요일", "수요일", "목요일", "금요일"];
-            let html = `<table><thead><tr><th>교시</th>`;
+            let html = `<h2 class='section-title'>학급 시간표</h2><table><thead><tr><th>교시</th>`;
             days.forEach(d => html += `<th>${d}</th>`);
             html += `</tr></thead><tbody>`;
 
@@ -276,155 +361,151 @@
             scheduleContainer.innerHTML += "<p>수행평가 일정이 없습니다.</p>";
         }
 
-        // --- 오늘의 학사 일정 ---
-        const academic = {
-            "울산여자고등학교 학사 일정": {
-                "6월": [
-                    "06.03: 대통령 선거",
-                    "06.04: 대수능 모의평가/전국연합학력평가",
-                    "06.05: 개교기념일",
-                    "06.06: 현충일"
-                ],
-                "7월": [
-                    "07.01: 지필평가", "07.02: 지필평가", "07.03: 지필평가", "07.04: 지필평가", // 지필평가 세분화
-                    "07.07: 수업량유연화주간, 꿈끼탐색주간",
-                    "07.08: 수업량유연화주간, 꿈끼탐색주간",
-                    "07.09: 수업량유연화주간, 꿈끼탐색주간", // 오늘 날짜에 맞춤
-                    "07.10: 전국연합학력평가 (3학년)/행복어울림과정",
-                    "07.14: 학생회 선거 정책 토론",
-                    "07.15: 학생회 선거",
-                    "07.18: 여름방학식"
-                ],
-                "8월": [
-                    "08.13: 개학일",
-                    "08.15: 광복절/오민영 생일",
-                    "08.29: 리더십캠프", "08.30: 리더십캠프"
-                ],
-                "9월": [
-                    "09.03: 대수능 모의평가(3학년)/전국연합학력평가(1,2학년)",
-                    "09.26: 지필평가",
-                    "09.29: 지필평가", "09.30: 지필평가"
-                ],
-                "10월": [
-                    "10.01: 지필평가",
-                    "10.03: 개천절",
-                    "10.05: 추석연휴", "10.06: 추석연휴", "10.07: 추석연휴",
-                    "10.08: 대체공휴일",
-                    "10.09: 한글날",
-                    "10.10: 재량휴업일",
-                    "10.14: 전국연합학력평가"
-                ],
-                "11월": [
-                    "11.12: 대학수학능력시험 예비소집일",
-                    "11.13: 재량휴업일"
-                ],
-                "12월": [
-                    "12.11: 지필평가", "12.12: 지필평가",
-                    "12.15: 지필평가", "12.16: 지필평가",
-                    "12.24: 졸업/진급사정회",
-                    "12.25: 성탄절",
-                    "12.29: 백합의 향 축제", "12.30: 백합의 향 축제",
-                    "12.31: 겨울방학식"
-                ],
-                "2026년 1월&2월": [ // 연도 구분 명확화
-                    "01.01: 신정",
-                    "02.02: 개학식",
-                    "02.05: 졸업식",
-                    "02.06: 종업식",
-                    "02.09: 봄방학 시작"
-                ]
-            }
-        };
+        // --- 학사 일정 달력 ---
+        let currentCalendarDate = new Date(); // 현재 달력에 표시할 날짜 (년, 월)
+        currentCalendarDate.setDate(1); // 항상 1일로 설정하여 월 변경 시 문제 방지
 
-        academicScheduleContainer.innerHTML += `<h2 class="section-title">오늘의 학사 일정</h2>`;
+        function renderCalendar() {
+            academicScheduleContainer.innerHTML = ''; // 기존 달력 삭제
 
-        const today = new Date();
-        const currentMonth = today.getMonth() + 1; // 실제 월 (1~12)
-        const currentDate = today.getDate(); // 실제 일 (1~31)
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth(); // 0부터 시작 (0:1월, 1:2월...)
 
-        let todayAcademicEventsFound = false;
-        let academicHtml = "<ul>";
+            const monthNames = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+            const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
-        // 학사 일정의 모든 월을 순회하며 오늘 날짜와 일치하는 일정 찾기
-        for (const monthKey in academic["울산여자고등학교 학사 일정"]) {
-            // "월" 부분만 추출하여 숫자로 변환 (예: "6월" -> 6, "2026년 1월&2월" -> 1)
-            let monthNumMatch = monthKey.match(/(\d{1,2})월/);
-            if (!monthNumMatch) {
-                monthNumMatch = monthKey.match(/(\d{1,2})년 (\d{1,2})월/);
-                if (monthNumMatch) {
-                    // "2026년 1월&2월" 같은 형식일 경우 1월로 간주 (또는 2월도 처리 필요시 로직 추가)
-                    monthNumMatch[1] = monthNumMatch[2];
-                }
-            }
-            
-            const monthNumber = monthNumMatch ? parseInt(monthNumMatch[1]) : null;
-
-            if (monthNumber === currentMonth) {
-                const eventsInMonth = academic["울산여자고등학교 학사 일정"][monthKey];
-                eventsInMonth.forEach(event => {
-                    // 이벤트 문자열에서 날짜 부분 추출 (예: "07.09: 수업량..." 에서 07.09 추출)
-                    const eventDateMatch = event.match(/^(\d{2}\.\d{2})/);
-                    if (eventDateMatch) {
-                        const [eventMonth, eventDay] = eventDateMatch[1].split('.').map(Number);
-                        if (eventMonth === currentMonth && eventDay === currentDate) {
-                            academicHtml += `<li>${event.substring(event.indexOf(':') + 1).trim()}</li>`; // 날짜 부분 제외하고 내용만 표시
-                            todayAcademicEventsFound = true;
-                        }
-                    } else {
-                        // 날짜 형식이 없는 이벤트도 처리 (예: "성탄절")
-                        // 오늘 날짜에 특별한 이벤트가 있을 경우 수동으로 추가하거나, 날짜를 포함하도록 데이터 수정 필요
-                    }
-                });
-            }
-        }
-
-        academicHtml += "</ul>";
-
-        if (todayAcademicEventsFound) {
-            academicScheduleContainer.innerHTML += academicHtml;
-        } else {
-            academicScheduleContainer.innerHTML += "<p>오늘의 학사 일정이 없습니다.</p>";
-        }
-
-        // --- 오늘의 급식 ---
-        const meals = {
-            "7월 급식": {
-                "7/7": ["열무비빔밥", "콩국(자율)", "북어미역국", "배추김치", "치아바타치즈샌드위치", "복숭아음료"],
-                "7/8": ["어묵떡새송이구이", "영양쌀밥", "추어탕(자율)", "찜닭(국)", "오이부추무침", "배추김치", "짜먹는요구르트"],
-                "7/9": ["유부초밥", "돈코츠라멘(주식)", "찐만두", "궁채양파장아찌", "배추김치", "귤"], // 오늘 날짜 2025.07.09
-                "7/10": ["귀리밥", "백김치미역냉국", "방풍나물무침(자율)", "주꾸미떡볶음", "닭튀김샐러드", "배추김치", "바나나"],
-                "7/11": ["현미밥", "육개장", "캬라멜견과볶음", "깻잎무침(자율)", "타코오믈렛", "김치볶음", "찐두부&햄", "토마토유자절임"],
-                "7/14": ["참치비빔밥(포케)", "가쓰오맑은국", "알감자조림", "다시마채무침(자율)", "배추김치", "나쵸(치즈소스)", "망고바"],
-                "7/15": ["오색현미밥", "들깨순두부국", "갈비맛돈육단호박조림", "야채쌈(자율)", "새우깐풍", "배추김치", "키위주스"],
-                "7/16": ["닭야채볶음밥(치즈)", "미소된장국(미역유부)", "리코타치즈샐러드(발사믹)", "배추김치", "감자핫도그", "새송이고추장구이(자율)", "요구르트"],
-                "7/17": ["통밀쌀밥", "냉짬뽕국(면사리)", "건파래자반", "탕수육(하와이안)", "배추김치", "단무지무침", "수박"],
-                "7/18": ["지정밥", "묵채국", "야채겉절이", "오리불고기", "감자그라탕", "열무김치", "아이스크림"]
-            },
-            // 다른 월의 급식도 여기에 추가
-        };
-
-        mealScheduleContainer.innerHTML += `<h2 class="section-title">오늘의 급식</h2>`;
-
-        // 급식 데이터의 날짜 형식에 맞춰 '월/일' 형식으로 생성
-        const currentMealDate = `${today.getMonth() + 1}/${today.getDate()}`; // 예: "7/9"
-
-        const mealTitle = `${today.getMonth() + 1}월 급식`; // 현재 월에 맞는 급식 정보 가져오기
-        let todayMealFound = false;
-        let mealHtml = "<ul>";
-
-        if (meals[mealTitle] && meals[mealTitle][currentMealDate]) {
-            meals[mealTitle][currentMealDate].forEach(menu => {
-                mealHtml += `<li>${menu}</li>`;
+            let html = `
+                <h2 class="section-title">학사 일정</h2>
+                <div class="calendar-nav">
+                    <button class="prev-month" onclick="changeMonth(-1)">&lt;</button>
+                    <span class="current-month-year">${year}년 ${monthNames[month]}</span>
+                    <button class="next-month" onclick="changeMonth(1)">&gt;</button>
+                </div>
+                <table class="calendar-table">
+                    <thead>
+                        <tr>`;
+            daysOfWeek.forEach(day => {
+                html += `<th>${day}</th>`;
             });
-            todayMealFound = true;
-        }
-        mealHtml += "</ul>";
+            html += `       </tr>
+                    </thead>
+                    <tbody>`;
 
-        if (todayMealFound) {
-            mealScheduleContainer.innerHTML += mealHtml;
-        } else {
-            mealScheduleContainer.innerHTML += "<p>오늘의 급식 정보가 없습니다.</p>";
+            // 해당 월의 첫 번째 날짜와 마지막 날짜 구하기
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0); // 다음 달의 0일 = 현재 달의 마지막 날
+
+            // 첫 날의 요일 (0:일, 1:월, ...)
+            const startDay = firstDayOfMonth.getDay();
+            const numDays = lastDayOfMonth.getDate(); // 해당 월의 총 일수
+
+            let date = 1;
+            for (let i = 0; i < 6; i++) { // 최대 6주까지 표시
+                html += `<tr>`;
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < startDay) {
+                        html += `<td></td>`; // 첫 주 빈 칸 채우기
+                    } else if (date > numDays) {
+                        html += `<td></td>`; // 마지막 주 빈 칸 채우기
+                    } else {
+                        const today = new Date();
+                        const isToday = (date === today.getDate() && month === today.getMonth() && year === today.getFullYear());
+                        const todayClass = isToday ? 'today' : '';
+                        
+                        const events = academicScheduleData[year] && academicScheduleData[year][month + 1] ?
+                                       academicScheduleData[year][month + 1].filter(event => event.date === date) : [];
+
+                        html += `<td class="${todayClass}">
+                                    <div class="date-number">${date}</div>`;
+                        if (events.length > 0) {
+                            html += `<ul class="academic-events">`;
+                            events.forEach(event => {
+                                html += `<li>${event.event}</li>`;
+                            });
+                            html += `</ul>`;
+                        }
+                        html += `</td>`;
+                        date++;
+                    }
+                }
+                html += `</tr>`;
+                if (date > numDays) break; // 모든 날짜를 채웠으면 루프 종료
+            }
+            html += `   </tbody>
+                </table>`;
+            academicScheduleContainer.innerHTML = html;
         }
+
+        function changeMonth(delta) {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta);
+            renderCalendar();
+        }
+
+        renderCalendar(); // 페이지 로드 시 달력 초기 렌더링
+
+        // --- 주간 급식표 ---
+        function renderWeeklyMeal() {
+            mealScheduleContainer.innerHTML = ''; // 기존 급식표 삭제
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1; // 1부터 시작하는 월
+            const day = today.getDate(); // 현재 날짜
+
+            // 현재 주의 월요일을 찾습니다. (일요일 0, 월요일 1, ..., 토요일 6)
+            let currentDayOfWeek = today.getDay(); // 0 (일) - 6 (토)
+            let diff = today.getDate() - currentDayOfWeek + (currentDayOfWeek === 0 ? -6 : 1); // 월요일로 맞추기
+            
+            const mondayOfWeek = new Date(today.setDate(diff));
+
+            let html = `
+                <h2 class="section-title">주간 급식표</h2>
+                <table class="meal-table">
+                    <thead>
+                        <tr>
+                            <th>요일</th>
+                            <th>날짜</th>
+                            <th>메뉴</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            const daysToDisplay = ["월요일", "화요일", "수요일", "목요일", "금요일"]; // 주말은 표시 안함
+
+            for (let i = 0; i < 5; i++) { // 월요일부터 금요일까지 5일
+                let displayDate = new Date(mondayOfWeek);
+                displayDate.setDate(mondayOfWeek.getDate() + i);
+
+                const mealMonth = displayDate.getMonth() + 1;
+                const mealDay = displayDate.getDate();
+                const mealKey = mealDay; // 급식 데이터 키는 일만 사용
+
+                const mealsForDay = mealsData[displayDate.getFullYear()] && mealsData[displayDate.getFullYear()][mealMonth] ?
+                                    mealsData[displayDate.getFullYear()][mealMonth][mealKey] : null;
+
+                html += `<tr>
+                            <td>${daysToDisplay[i]}</td>
+                            <td>${mealMonth}/${mealDay}</td>
+                            <td>`;
+                if (mealsForDay && mealsForDay.length > 0) {
+                    html += `<ul>`;
+                    mealsForDay.forEach(menu => {
+                        html += `<li>${menu}</li>`;
+                    });
+                    html += `</ul>`;
+                } else {
+                    html += `급식 정보 없음`;
+                }
+                html += `   </td>
+                        </tr>`;
+            }
+            html += `   </tbody>
+                </table>`;
+            mealScheduleContainer.innerHTML = html;
+        }
+
+        renderWeeklyMeal(); // 페이지 로드 시 주간 급식표 렌더링
+
     </script>
 </body>
 </html>
