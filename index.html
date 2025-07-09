@@ -8,29 +8,38 @@
 </head>
 <body>
     <div class="container">
-        <h1>로그인</h1>
-        <input id="loginId" type="text" placeholder="아이디" autocomplete="off" />
-        <input id="loginPw" type="password" placeholder="비밀번호" autocomplete="off" />
-        <button onclick="login()">로그인</button>
+        <div id="loginSection">
+            <h1>로그인</h1>
+            <input id="loginId" type="text" placeholder="아이디" autocomplete="off" />
+            <input id="loginPw" type="password" placeholder="비밀번호" autocomplete="off" />
+            <button onclick="login()">로그인</button>
+            <button id="showSignupBtn" onclick="toggleSignup()">회원가입이 필요하신가요?</button>
+        </div>
 
-        <button id="showSignupBtn" onclick="toggleSignup()">회원가입</button>
-
-        <div id="signupForm">
+        <div id="signupSection" style="display: none;">
             <h1>회원가입</h1>
-            <input id="signupId" type="text" placeholder="아이디" autocomplete="off" />
-            <input id="signupPw" type="password" placeholder="비밀번호" autocomplete="off" />
+            <input id="signupId" type="text" placeholder="새 아이디" autocomplete="off" />
+            <input id="signupPw" type="password" placeholder="새 비밀번호" autocomplete="off" />
             <input id="signupClass" type="text" placeholder="학년-반 (예: 1-3)" autocomplete="off" />
             <button onclick="signup()">회원가입 완료</button>
+            <button id="backToLoginBtn" onclick="toggleSignup()">로그인으로 돌아가기</button>
         </div>
     </div>
 
     <script>
         function toggleSignup() {
-            const form = document.getElementById('signupForm');
-            form.style.display = (form.style.display === 'flex') ? 'none' : 'flex'; // 'block' 대신 'flex'로 변경
-            // 회원가입 폼이 보일 때 '회원가입' 버튼 텍스트 변경
-            const showSignupBtn = document.getElementById('showSignupBtn');
-            showSignupBtn.textContent = (form.style.display === 'flex') ? '로그인으로 돌아가기' : '회원가입';
+            const loginSection = document.getElementById('loginSection');
+            const signupSection = document.getElementById('signupSection');
+            
+            if (loginSection.style.display === 'none') {
+                // 현재 회원가입이 보이면 로그인으로 전환
+                loginSection.style.display = 'flex';
+                signupSection.style.display = 'none';
+            } else {
+                // 현재 로그인이 보이면 회원가입으로 전환
+                loginSection.style.display = 'none';
+                signupSection.style.display = 'flex';
+            }
         }
 
         function signup() {
