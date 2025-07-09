@@ -464,6 +464,7 @@
 
             // 현재 주의 월요일을 찾습니다. (일요일 0, 월요일 1, ..., 토요일 6)
             let currentDayOfWeek = today.getDay(); // 0 (일) - 6 (토)
+            // 오늘이 일요일이면 지난 월요일을 찾고, 아니면 이번 주 월요일을 찾음
             let diff = today.getDate() - currentDayOfWeek + (currentDayOfWeek === 0 ? -6 : 1); 
             const mondayOfWeek = new Date(today.setDate(diff));
 
@@ -472,8 +473,16 @@
                 <table class="meal-table">
                     <thead>
                         <tr>
-                            <th>요일</th>
-                            <th colspan="2">메뉴</th>
+                            <th colspan="2">월요일</th>
+                            <th colspan="2">화요일</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">수요일</th>
+                            <th colspan="2">목요일</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">금요일</th>
+                            <th colspan="2" class="weekend-header">주말</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -495,7 +504,7 @@
                 const dayName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"][displayDate.getDay()];
                 const formattedDate = `(${mealMonth}/${mealDay})`;
 
-                let menuContent = `급식 정보 없음`;
+                let menuContent = `<span class="no-meal">급식 정보 없음</span>`;
                 if (mealsForDay && mealsForDay.length > 0 && !(mealsForDay.length === 2 && mealsForDay[0] === "주말" && mealsForDay[1] === "급식 없음")) {
                     menuContent = `<ul>`;
                     mealsForDay.forEach(menu => {
@@ -503,7 +512,7 @@
                     });
                     menuContent += `</ul>`;
                 } else if (dayName === "토요일" || dayName === "일요일") {
-                    menuContent = `<span class="no-meal">주말</span>`; // 주말은 "주말"만 표시
+                    menuContent = `<span class="no-meal">주말은 급식이 제공되지 않습니다.</span>`;
                 }
 
 
@@ -515,34 +524,28 @@
                 });
             }
 
-            // 첫째 줄: 월요일, 화요일
+            // 월요일, 화요일 (daysData[1], daysData[2])
             html += `<tr>
-                        <td class="day-cell">월요일<br><span class="meal-date">${daysData[1].date}</span></td>
-                        <td class="menu-cell" colspan="2">${daysData[1].menu}</td>
-                    </tr>
-                    <tr>
-                        <td class="day-cell">화요일<br><span class="meal-date">${daysData[2].date}</span></td>
-                        <td class="menu-cell" colspan="2">${daysData[2].menu}</td>
+                        <td class="meal-date-cell">${daysData[1].date}</td>
+                        <td class="meal-content-cell">${daysData[1].menu}</td>
+                        <td class="meal-date-cell">${daysData[2].date}</td>
+                        <td class="meal-content-cell">${daysData[2].menu}</td>
                     </tr>`;
 
-            // 둘째 줄: 수요일, 목요일
+            // 수요일, 목요일 (daysData[3], daysData[4])
             html += `<tr>
-                        <td class="day-cell">수요일<br><span class="meal-date">${daysData[3].date}</span></td>
-                        <td class="menu-cell" colspan="2">${daysData[3].menu}</td>
-                    </tr>
-                    <tr>
-                        <td class="day-cell">목요일<br><span class="meal-date">${daysData[4].date}</span></td>
-                        <td class="menu-cell" colspan="2">${daysData[4].menu}</td>
+                        <td class="meal-date-cell">${daysData[3].date}</td>
+                        <td class="meal-content-cell">${daysData[3].menu}</td>
+                        <td class="meal-date-cell">${daysData[4].date}</td>
+                        <td class="meal-content-cell">${daysData[4].menu}</td>
                     </tr>`;
 
-            // 셋째 줄: 금요일, 주말 (토요일, 일요일)
+            // 금요일 (daysData[5])
             html += `<tr>
-                        <td class="day-cell">금요일<br><span class="meal-date">${daysData[5].date}</span></td>
-                        <td class="menu-cell" colspan="2">${daysData[5].menu}</td>
-                    </tr>
-                    <tr>
-                        <td class="day-cell weekend-cell">주말<br><span class="meal-date">${daysData[6].date}~${daysData[0].date}</span></td>
-                        <td class="menu-cell weekend-cell" colspan="2">
+                        <td class="meal-date-cell">${daysData[5].date}</td>
+                        <td class="meal-content-cell">${daysData[5].menu}</td>
+                        <td class="meal-date-cell weekend-cell">${daysData[6].date} ~ ${daysData[0].date}</td>
+                        <td class="meal-content-cell weekend-cell">
                             <span class="no-meal">주말은 급식이 제공되지 않습니다.</span>
                         </td>
                     </tr>`;
