@@ -347,22 +347,24 @@ ul li {
     border-collapse: collapse;
     margin-top: 25px;
     font-size: 15px;
-    table-layout: fixed; /* 고정 레이아웃 */
+    table-layout: fixed; /* 테이블 레이아웃 고정 유지 - 너비 균등 분배 위함 */
 }
 
 .meal-table th, .meal-table td {
     border: 1px solid #dcdcdc;
-    padding: 10px 8px;
+    padding: 2px 2px; /* 패딩을 극도로 줄여 셀 내부 공간 최소화 */
     text-align: center;
-    vertical-align: top; /* 메뉴가 많을 때 상단 정렬 */
+    vertical-align: top; /* 텍스트를 셀 상단에 정렬하여 불필요한 빈 공간 제거 */
+    height: auto; /* 내용에 따라 높이 자동 조절 */
+    line-height: 1.1; /* 텍스트 줄 간격도 더 줄여 공간 압축 */
 }
 
 .meal-table th {
     background-color: #3498db;
     color: white;
     font-weight: 600;
-    font-size: 16px;
-    padding: 12px 8px;
+    font-size: 13px; /* 헤더 글꼴 크기 조금 더 줄임 */
+    padding: 4px 2px; /* 헤더 패딩도 더 줄임 */
 }
 
 .meal-table tbody tr:nth-child(even) {
@@ -374,65 +376,42 @@ ul li {
 }
 
 .meal-table ul {
-    list-style: none; /* 급식 메뉴 목록 점 제거 */
+    list-style: none;
     padding: 0;
     margin: 0;
-    text-align: left; /* 메뉴 목록 왼쪽 정렬 */
-    font-size: 0.95em;
+    text-align: left;
+    font-size: 0.8em; /* 메뉴 글자 크기를 더 줄임 */
     color: #444;
-    line-height: 1.4;
+    line-height: 1.1; /* 메뉴 줄 간격도 더 줄임 */
 }
 
 .meal-table ul li {
-    margin-bottom: 2px;
+    margin-bottom: 0px;
+    padding: 0; /* 각 메뉴 항목의 내부 패딩 완전히 제거 */
+    word-break: keep-all; /* 단어가 잘리지 않고 한 줄에 표시되도록 노력 (긴 단어는 여전히 줄바꿈 가능) */
 }
 
-/* 모바일 반응형 조절 (추가) */
+/* 모바일 반응형 조절 (더욱 조밀하게) */
 @media (max-width: 768px) {
-    .calendar-table th, .calendar-table td {
-        padding: 5px;
-        height: 70px; /* 모바일에서 셀 높이 조절 */
-        font-size: 12px;
-    }
-    .academic-events {
-        font-size: 0.75em;
-        max-height: 40px; /* 모바일에서 일정 목록 높이 조절 */
-    }
-    .date-number {
-        font-size: 1em;
-    }
     .meal-table th, .meal-table td {
-        padding: 8px 5px;
-        font-size: 13px;
+        padding: 2px 1px;
+        font-size: 9px;
+        line-height: 1;
     }
     .meal-table ul {
-        font-size: 0.85em;
+        font-size: 0.65em;
+        line-height: 0.95;
     }
 }
 
 @media (max-width: 480px) {
-    .calendar-nav {
-        font-size: 18px;
-        margin-bottom: 15px;
-    }
-    .calendar-nav button {
-        font-size: 18px;
-        padding: 6px 12px;
-    }
-    .current-month-year {
-        font-size: 20px;
-    }
-    .calendar-table th, .calendar-table td {
-        height: 60px;
-        font-size: 11px;
-    }
-    .academic-events {
-        max-height: 30px;
-    }
-    .date-number {
-        font-size: 0.9em;
-    }
     .meal-table th, .meal-table td {
-        font-size: 12px;
+        padding: 1px 1px;
+        font-size: 8px;
+        line-height: 0.9;
+    }
+    .meal-table ul {
+        font-size: 0.6em;
+        line-height: 0.9;
     }
 }
